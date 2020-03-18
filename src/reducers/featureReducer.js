@@ -1,4 +1,4 @@
-import { ADD_FEATURE } from "../actions/featureActions";
+import { ADD_FEATURE, REMOVE_FEATURE } from "../actions/featureActions";
 
 export const initialState = {
         additionalPrice: 0,
@@ -32,6 +32,18 @@ export const featureReducer = (state = initialState, action) => {
               name: action.payload.name,
               price: action.payload.price
             }
+          ]
+        }
+      }
+
+    case REMOVE_FEATURE:
+      return {
+        ...state,
+        additionalPrice: state.additionalPrice - action.payload.price,
+        car: {
+          ...state.car,
+          features: [
+            state.car.features.filter(feature => feature == action.payload)
           ]
         }
       }
